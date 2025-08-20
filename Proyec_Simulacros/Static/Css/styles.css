@@ -1,0 +1,50 @@
+/* Estilos personalizados adicionales */
+.timer-warning {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.question-option {
+    transition: all 0.3s ease;
+}
+
+.question-option:hover {
+    transform: translateX(5px);
+}
+
+.question-option input[type="radio"]:checked + span {
+    font-weight: 600;
+}
+
+.progress-fill {
+    transition: width 0.5s ease;
+}
+
+.result-card {
+    transition: all 0.3s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.score-animation {
+    animation: scoreReveal 0.5s ease-out;
+}
+
+@keyframes scoreReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
