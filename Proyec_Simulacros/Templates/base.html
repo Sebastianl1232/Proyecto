@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulacros Saber ICFES y SaberPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="{{ url_for('index') }}" class="flex items-center space-x-2">
+                        <i class="fas fa-graduation-cap text-2xl text-purple-600"></i>
+                        <span class="text-xl font-bold text-gray-800">Simulacros ICFES</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('dashboard') }}" class="text-gray-700 hover:text-purple-600 transition">
+                            <i class="fas fa-tachometer-alt mr-1"></i> Dashboard
+                        </a>
+                        <a href="{{ url_for('select_test') }}" class="text-gray-700 hover:text-purple-600 transition">
+                            <i class="fas fa-play-circle mr-1"></i> Nueva Prueba
+                        </a>
+                        <a href="{{ url_for('history') }}" class="text-gray-700 hover:text-purple-600 transition">
+                            <i class="fas fa-history mr-1"></i> Historial
+                        </a>
+                        <a href="{{ url_for('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                            <i class="fas fa-sign-out-alt mr-1"></i> Salir
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="text-gray-700 hover:text-purple-600 transition">
+                            <i class="fas fa-sign-in-alt mr-1"></i> Iniciar Sesión
+                        </a>
+                        <a href="{{ url_for('register') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                            <i class="fas fa-user-plus mr-1"></i> Registrarse
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="fixed top-20 right-4 z-50 space-y-2">
+                {% for message in messages %}
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded shadow-lg" role="alert">
+                        <p class="font-medium">{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p>&copy; 2024 Simulacros ICFES. Todos los derechos reservados.</p>
+                <p class="mt-2 text-gray-400">Prepárate para tus pruebas con nosotros</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Auto-hide flash messages
+        setTimeout(() => {
+            const messages = document.querySelectorAll('[role="alert"]');
+            messages.forEach(msg => msg.remove());
+        }, 5000);
+    </script>
+</body>
+</html>
