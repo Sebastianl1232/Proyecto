@@ -4,7 +4,7 @@ from database import app, db, init_database
 from models import User, Question, TestResult, TestAnswer
 import bcrypt
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 
 @app.route('/')
 def index():
